@@ -21,6 +21,11 @@ jobs:
         python -m pip install --upgrade pip
         # If you have any additional dependencies listed in a requirements.txt file, uncomment the next line
         # pip install -r requirements.txt
+    
+    - name: test outputs
+      run: |
+        pwd
+        ls
 
     - name: Run unittest script
       run: python tests/unit-test.py
