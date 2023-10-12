@@ -1,6 +1,6 @@
 # Main Lambda Function
 module "wmg_lambda_function" {
-  source = "/Users/qdang89/Documents/watchmaker-genomics/terraform-module-templates/lambda"
+  source = "git::github.com:dangq89/qd-wmg/terraform-module-templates.git//lambda?ref=main"
 
   name          = "wmg-lambda-container"
   ecr_repo_name = "qd-wmg"
