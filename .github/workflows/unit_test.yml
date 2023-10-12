@@ -25,6 +25,5 @@ jobs:
     - name: Run unittest script
       run: |
         cd tests/
-        ls
-        python unit-test.py
+        python unit_test.py
 
