@@ -1,0 +1,27 @@
+name: Run Unittests
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        # If you have any additional dependencies listed in a requirements.txt file, uncomment the next line
+        # pip install -r requirements.txt
+
+    - name: Run unittest script
+      run: python /tests/unit-test.py
+
