@@ -1,13 +1,13 @@
 # S3 Buckets 
 module "watchmaker_input_bucket" {
-  source            = "git::github.com:dangq89/qd-wmg/terraform-module-templates.git//s3?ref=main"
+  source            = "git@github.com:dangq89/qd-wmg.git//terraform-module-templates/s3?ref=main"
   name              = "${var.name}-input-files"
   enable_versioning = true
   long_term_storage = true
 }
 
 module "watchmaker_output_bucket" {
-  source            = "git::github.com:dangq89/qd-wmg/terraform-module-templates.git//s3?ref=main"
+  source            = "git@github.com:dangq89/qd-wmg.git//terraform-module-templates/s3?ref=main"
   name              = "${var.name}-output-files"
   enable_versioning = true
   long_term_storage = true
