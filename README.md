@@ -14,8 +14,6 @@ This repo contains the AWS infrastructure and script needed to count the number 
 
 Before you can interact with this code for development or testing, you need to get your environment set up.
 
-There are two options for this:
-
 1. Update the `setup.sh` file environment variables.
 2. Update the `terraform/terraform.tfvars` file variables.
 3. Update the `terraform/terraform.tf` backend bucket, key, region and profile.
