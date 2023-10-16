@@ -5,7 +5,7 @@ function set_variables {
     export IMAGE_NAME="watchmaker"
     export DOCKERFILE_PATH="."
     export TAG_NAME="latest"
-    export TEST_FILE_PATH="test_file"
+    export TEST_FILE_PATH="random_sequences.fasta"
     export BUCKET_NAME="watchmaker"
     export AWS_ACCOUNT_ID="881700076394"
 
@@ -14,7 +14,7 @@ function set_variables {
     echo "IMAGE_NAME=$IMAGE_NAME"
     echo "DOCKERFILE_PATH=$DOCKERFILE_PATH"
     echo "TAG_NAME=$TAG_NAME"
-    echo "TEST_FILE_PATH=$FILE_PATH"
+    echo "TEST_FILE_PATH=$TEST_FILE_PATH"
     echo "BUCKET_NAME=$BUCKET_NAME"
     echo "AWS_ACCOUNT_ID"=$AWS_ACCOUNT_ID
 }
@@ -58,6 +58,7 @@ echo "Running terraform apply..."
 cd terraform
 terraform init
 terraform apply -auto-approve
+
 if [ $? -ne 0 ]; then
     echo "Error during terraform apply"
     exit 2
@@ -68,7 +69,8 @@ sleep 10
 
 # Upload test file into S3
 echo "Uploading file to S3..."
-aws s3 cp "${TEST_FILE_PATH}/random_sequences.fasta" "s3://${BUCKET_NAME}-input-files/" --region ${AWS_REGION} --profile ${AWS_PROFILE}
+cd ../test_file/
+aws s3 cp "${TEST_FILE_PATH}" "s3://${BUCKET_NAME}-input-files/" --region ${AWS_REGION} --profile ${AWS_PROFILE}
 
 # Check the status of the last command (aws s3 cp)
 if [ $? -eq 0 ]; then

@@ -1,8 +1,10 @@
+import os
 import boto3
 
-# Constants
-OUTPUT_BUCKET = "watchmaker-output-files"
-SUBSTRING = 'AACGCT'
+# Read Constants from Environment Variables
+OUTPUT_BUCKET = os.environ['OUTPUT_BUCKET']
+SUBSTRING = os.environ['SUBSTRING']
+
 s3_client = boto3.client('s3')
 
 def lambda_handler(event, context):

@@ -32,12 +32,12 @@ In order to run the application, navivate to the root directory and run `sh setu
 
 ### Lambda function results
 
-The results of the lambda `count_substring_in_fasta` function can be found in the s3 `-output-files` bucket. The name structure is `<file-name>-results.txt`
+The results of the lambda `count_substring_in_fasta` function can be found in the s3 `<name>-output-files` bucket as `<file-name>-results.txt`.
 
 ### Unit test
 
 1. The unit test can be ran locally by navigating to the `/test/` directory and running `python unit_tests.py`.
-2. Alternatively the, the test can also be ran in the github repo in actions. 
+2. Alternatively the test can also be ran in the github repo in actions. 
 
 ### How to run unit test va github actions
 
@@ -51,8 +51,36 @@ The results of the lambda `count_substring_in_fasta` function can be found in th
 
 ### Terraform infrastructure breakdown
 
-S3 Bucket: input and output bucket for housing the test file and outputting the results.
-S3 Event Trigger: the lambda event trigger that takes place when a file is uploaded to the `<bucket_name>-input-files` s3 bucket.
-ECR: the private repo that contains the Docker image to be deployed to lambda.
-Lambda: Lambda function that gets deploy via a Docker image from ECR that houses the function to count the substrings in the test file
-IAM: Role and permissions needed for the lambda function
+- S3 Bucket: input and output bucket for housing the test file and outputting the results.
+- S3 Event Trigger: the s3 event that triggers the lambda function when a file is uploaded to the `<bucket_name>-input-files` s3 bucket.
+- ECR: the private repo that contains the Docker image to be deployed to lambda.
+  - For a production environment, stricter versioning would be applied to ensure deployments are controlled and also assists in troubleshooting and rollbacks
+- Lambda: Lambda function that gets deploy via a Docker image from ECR that houses the function to count the substrings in the test file
+- IAM: Role and permissions needed for the lambda function
+
+### Terraform Module Templates
+
+Utilizing module templates for common resources like S3 allows for resuability without having to rewrite the code each time as well as reducses errors since the encapsulation complexity has been tested and validated. 
+
+How to use the module templates
+  1. For this specific example, the terraform module template resides in the same repository as where it's being called. In a production environment, these templates would live in an entirely different repository and just needs to be sourced in the new module. 
+  2. To deploy a resource using the module template (S3), first create a terraform module and reference the template. 
+  3. In this particular example, the templates lives in the same repostiory as the modules that's calling it, but typically if this was a production environment, the templates would be residing in an entirely different repo so there is no confusion. 
+  4. Add the module block in your terraform and fill our the required variables in the `terraform.tfvars` file. 
+
+```
+s3.tf
+module "new_super_s3_bucket" {
+  source            = "git@github.com:dangq89/qd-wmg.git//terraform-module-templates/s3?ref=main"
+  name              = "${var.name}-input-files"
+  enable_versioning = var.versioning
+  long_term_storage = var.long_term_storage
+}
+
+terraform.tfvars
+name = super_secret_ninja_project
+versioning        = true
+long_term_storage = true
+```
+
+- For details on variables, please read descriptions in the [variables.tf](variables.tf) file.
