@@ -14,9 +14,21 @@ This repo contains the AWS infrastructure and script needed to count the number 
 
 Before you can interact with this code for development or testing, you need to get your environment set up.
 
-1. Update the `setup.sh` file environment variables.
+1. Update the following enviornment varialbes in `setup.sh`.
+   Required
+   1. `AWS_REGION` 
+   2. `AWS_PROFILE`
 2. Update the `terraform/terraform.tfvars` file variables.
+   Required
+   1. `aws_region`
+   2. `aws_profile`
+   3. `aws_account_id`
 3. Update the `terraform/terraform.tf` backend bucket, key, region and profile.
+   Required
+   1. `bucket`
+   2. `key`
+   3. `region`
+   4. `profile`
 
 ### Run the application
 
@@ -27,11 +39,10 @@ In order to run the application, navivate to the root directory and run `sh setu
 3. Retrieves an auth token for your Docker client.
 4. Builds your Docker image from the Docker.
 5. Runs `terraform apply --auto-approve` to create the AWS infrastructure needed to host the lambda function.
-6. Runs a `sleep 10` command to ensure that all the AWE infra has finished creating.
-7. Uploads the test file `test_file/random_sequences.fasta` to the s3 `-input-files` bucket to trigger the lambda function.
+6. Runs a `sleep 10` command to ensure that all the AWS infra has finished creating.
+7. Uploads the test file `test_file/random_sequences.fasta` to the s3 `<bucket-name>-input-files` bucket to trigger the lambda function.
 
 ### Lambda function results
-
 The results of the lambda `count_substring_in_fasta` function can be found in the s3 `<name>-output-files` bucket as `<file-name>-results.txt`.
 
 ### Unit test

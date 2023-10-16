@@ -1,13 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env bash
 function set_variables {
     export AWS_REGION="us-west-2"
     export AWS_PROFILE="qd-dev"
+
     export IMAGE_NAME="watchmaker"
     export DOCKERFILE_PATH="."
     export TAG_NAME="latest"
     export TEST_FILE_PATH="random_sequences.fasta"
     export BUCKET_NAME="watchmaker"
-    export AWS_ACCOUNT_ID="881700076394"
 
     echo "AWS_REGION=$AWS_REGION"
     echo "AWS_PROFILE=$AWS_PROFILE"
@@ -16,7 +16,6 @@ function set_variables {
     echo "TAG_NAME=$TAG_NAME"
     echo "TEST_FILE_PATH=$TEST_FILE_PATH"
     echo "BUCKET_NAME=$BUCKET_NAME"
-    echo "AWS_ACCOUNT_ID"=$AWS_ACCOUNT_ID
 }
 
 # Set up enviornmental variables
@@ -27,14 +26,10 @@ set_variables
 echo "Building Docker image..."
 
 # Check if Docker is running
-if ! docker info &>/dev/null; then
+if ! command -v docker &> /dev/null; then
     echo "Docker does not seem to be running, start it first and then run this script."
     exit 1
 fi
-
-# Retrieve an authentication token and authenticate your Docker client to your registry
-aws ecr get-login-password --region ${AWS_REGION} --profile ${AWS_PROFILE} \
-| docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
 
 # Check if the command was successful
 if [ $? -ne 0 ]; then

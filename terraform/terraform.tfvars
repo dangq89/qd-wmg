@@ -1,8 +1,9 @@
 # AWS Profile
 aws_region     = "us-west-2"
 aws_profile    = "qd-dev"
-name           = "watchmaker"
 aws_account_id = "881700076394"
+
+name           = "watchmaker"
 
 # ECR
 ecr_image_tag    = "latest"
