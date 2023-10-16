@@ -1,7 +1,7 @@
 # AWS Profile
 aws_region     = "us-west-2"
 aws_profile    = "qd-dev"
-name           = "watchmaker" # name also needs to be reflected in lambda function output bucket
+name           = "watchmaker"
 aws_account_id = "881700076394"
 
 # ECR

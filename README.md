@@ -53,3 +53,10 @@ The results of the lambda `count_substring_in_fasta` function can be found in th
 6. Now on the left hand side, click on 'All workflows'
 7. You should now see your new github action runner, click into the running to see the unit test output.
 
+### Terraform infrastructure breakdown
+
+S3 Bucket: input and output bucket for housing the test file and outputting the results.
+S3 Event Trigger: the lambda event trigger that takes place when a file is uploaded to the `<bucket_name>-input-files` s3 bucket.
+ECR: the private repo that contains the Docker image to be deployed to lambda.
+Lambda: Lambda function that gets deploy via a Docker image from ECR that houses the function to count the substrings in the test file
+IAM: Role and permissions needed for the lambda function
