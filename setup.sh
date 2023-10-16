@@ -7,8 +7,8 @@ function set_variables {
     export IMAGE_NAME="watchmaker"
     export DOCKERFILE_PATH="."
     export TAG_NAME="latest"
-    export TEST_FILE_PATH="test_file/random_sequences.fasta"
-    export BUCKET_NAME="watchmaker-input-files"
+    export TEST_FILE_PATH="test_file"
+    export BUCKET_NAME="watchmaker"
     export AWS_ACCOUNT_ID="881700076394"
 
     echo "AWS_REGION=$AWS_REGION"
@@ -70,7 +70,7 @@ sleep 10
 
 # Upload test file into S3
 echo "Uploading file to S3..."
-aws s3 cp "${TEST_FILE_PATH}" "s3://${BUCKET_NAME}/" --region ${AWS_REGION} --profile ${AWS_PROFILE}
+aws s3 cp "${TEST_FILE_PATH}/random_sequences.fasta" "s3://${BUCKET_NAME}-input-files/" --region ${AWS_REGION} --profile ${AWS_PROFILE}
 
 # Check the status of the last command (aws s3 cp)
 if [ $? -eq 0 ]; then

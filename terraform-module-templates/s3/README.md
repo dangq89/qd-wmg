@@ -1,5 +1,7 @@
 ### S3 Bucket Module
 
+Utilizing module templates for common resources like S3 allows for resuability without having to rewrite the code each time as well as reducses errors since the encapsulation complexity has been tested and validated. 
+
 ## Example
 ```terraform
 provider "aws" {

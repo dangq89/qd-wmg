@@ -20,17 +20,6 @@ There are two options for this:
 2. Update the `terraform/terraform.tfvars` file variables.
 3. Update the `terraform/terraform.tf` backend bucket, key, region and profile.
 
-NOTE: some variable names reference each other so be sure to be consistent. For example, the input bucket name is referenced in the `setup.sh` file so be sure to add `-input-files` after your terraform `name` variable in `terraform/terraform.tfvars`
-
-```
-EXAMPLE:
-terraform.tfvars
-name = watchmater
-
-setup.sh
-BUCKET_NAME="watchmaker-input-files"
-```
-
 ### Run the application
 
 In order to run the application, navivate to the root directory and run `sh setup.sh`. The bash script with set up and run the following: 
