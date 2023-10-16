@@ -1,7 +1,5 @@
 #!/bin/bash
 function set_variables {
-    echo "Setting up environmental variables..."
-
     export AWS_REGION="us-west-2"
     export AWS_PROFILE="qd-dev"
     export IMAGE_NAME="watchmaker"
