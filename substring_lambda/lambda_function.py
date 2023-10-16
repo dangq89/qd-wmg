@@ -1,7 +1,7 @@
 import boto3
 
 # Constants
-OUTPUT_BUCKET = "watchmaker-sequencing-output-files"
+OUTPUT_BUCKET = "watchmaker-output-files"
 SUBSTRING = 'AACGCT'
 s3_client = boto3.client('s3')
 
@@ -26,7 +26,6 @@ def lambda_handler(event, context):
     }
 
 def count_substring_in_fasta(file_content):
-
     sequence = ""
 
     for line in file_content.splitlines():
