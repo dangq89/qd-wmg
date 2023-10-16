@@ -19,8 +19,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        # If you have any additional dependencies listed in a requirements.txt file, uncomment the next line
-        # pip install -r requirements.txt
+        pip install boto3
 
     - name: Run unittest script
       run: |
