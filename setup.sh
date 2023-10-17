@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 function set_variables {
-    export AWS_REGION="us-west-2"
-    export AWS_PROFILE="qd-dev"
+    export AWS_REGION="<aws_region>"
+    export AWS_PROFILE="<aws_profile"
 
     export IMAGE_NAME="watchmaker"
     export DOCKERFILE_PATH="."

@@ -1,7 +1,7 @@
 # AWS Profile
-aws_region     = "us-west-2"
-aws_profile    = "qd-dev"
-aws_account_id = "881700076394"
+aws_region     = "<aws_region>"
+aws_profile    = "<aws_profile>"
+aws_account_id = "<aws_account_id>"
 
 name           = "watchmaker"
 

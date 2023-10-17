@@ -1,9 +1,9 @@
 terraform {
   backend "s3" {
-    bucket  = "terraform-remote-state-qd"
+    bucket  = "<terraform_remote_state_bucket>"
     key     = "terraform.tfstate"
-    region  = "us-west-2"
-    profile = "qd-dev"
+    region  = "<aws_region>"
+    profile = "<aws_profile>"
   }
 
   required_providers {
