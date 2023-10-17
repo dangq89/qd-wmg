@@ -28,7 +28,7 @@ resource "null_resource" "docker_push" {
 
   provisioner "local-exec" {
     command = <<EOD
-      command = "echo '${data.aws_ecr_authorization_token.token.password}' | docker login --username AWS --password-stdin ${data.aws_ecr_authorization_token.token.proxy_endpoint}"
+      aws ecr get-login-password --region ${var.aws_region} --profile ${var.aws_profile} | docker login --username AWS --password-stdin ${data.aws_ecr_authorization_token.token.proxy_endpoint}
       docker tag ${var.name}:${var.ecr_image_tag} ${var.aws_account_id}.dkr.ecr.${var.aws_region}.amazonaws.com/${var.name}:${var.ecr_image_tag}
       $(aws ecr get-login --no-include-email --region ${var.aws_region} --profile ${var.aws_profile})
       docker push ${aws_ecr_repository.wmg.repository_url}

@@ -74,15 +74,15 @@ The results of the lambda `count_substring_in_fasta` function can be found in th
 Utilizing module templates for common resources like S3 allows for resuability without having to rewrite the code each time as well as reducses errors since the encapsulation complexity has been tested and validated. 
 
 How to use the module templates
-  1. For this specific example, the terraform module template resides in the same repository as where it's being called. In a production environment, these templates would live in an entirely different repository and just needs to be sourced in the new module. 
-  2. To deploy a resource using the module template (S3), first create a terraform module and reference the template. 
-  3. In this particular example, the templates lives in the same repostiory as the modules that's calling it, but typically if this was a production environment, the templates would be residing in an entirely different repo so there is no confusion. 
-  4. Add the module block in your terraform and fill our the required variables in the `terraform.tfvars` file. 
+  1. To deploy a resource using the module template (S3), first create a terraform module and reference the module template. In a production environment, these templates would live in an entirely different github repository and just needs to be sourced in the new module calling it.
+  2. In this particular example, the templates lives in the same repostiory as the modules that's calling it and is sourced locally. 
+  3. Add the module block in your terraform and fill out the required variables in the `terraform.tfvars` file. 
 
+EXAMPLE:
 ```
 s3.tf
 module "new_super_s3_bucket" {
-  source            = "git@github.com:dangq89/qd-wmg.git//terraform-module-templates/s3?ref=main"
+  source            = "../terraform-module-templates/s3"
   name              = "${var.name}-input-files"
   enable_versioning = var.versioning
   long_term_storage = var.long_term_storage
